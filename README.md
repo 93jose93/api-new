@@ -1,79 +1,80 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## About Laravel
+## Protección de una API con Login
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+EL CONTROLADOR EXISTEN 5 METODOS
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## test_store
 
-## Learning Laravel
+## test_show
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## test_update
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## test_delete
 
-## Laravel Sponsors
+## test_index
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Pero existe el de validación, y el de seguridad autenticación:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+## test_validate_title
 
-## Contributing
+FFFFFFF.   ESTO SIGNIFICA CUANDO TODOS LOS METODOS FALLAN PERO EL UTLIMO FUNCIONA QUE ES EL PUNTO, cuando se agrega el Nuevo metodo de 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+autenticar Usuario y no sea publico
 
-## Code of Conduct
+## test_guest
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+$this->json('GET', '/api/posts')->assertStatus(401);//esto es cuando un api es public
 
-## Security Vulnerabilities
+Un ejemplo cuando se agrega cuando es privado
+ 
+$this->actingAs($user, 'api')->json('POST', '/api/posts', [ 'title' => 'El post de prueba']);
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Comandos de laravel usados
 
-## License
+## php artisan make:test UserTest 
+dentro de test, se crea en el apartado de funcional
+## php artisan make:test UserTest --unit
+con este codigo creamos en la carpeta test, es para probar y no trabajar con la carpeta produccion, hace las misma funciones.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+vendor/bin/phpunit este comando es para ver los test que están funcionando, confirmaciones
+
+## php artisan make:test Http/Controllers/Api/PostControllerTest 
+este es el mismo código de test pero esta ves se coloco la ruta para ser mas verídico donde are la prueba 
+
+
+## php artisan make:controller Api/PostController --api --model=Post 
+este comando ya es usado pero esta ves para crear el controlador le digo que quiero que sea dentro de una carptea Api, que sea de tipo recurso --api y que se conecte con el modelo que ya se habia creado –model=Post
+
+## vendor/bin/phpunit --filter test_update 
+ este es para filtrar un único test, es cuando hay varias pruebas, pero quiero solo consultar el test de update
+
+## notas
+
+Respuesta (200): es ok
+
+Respuesta (404):ruta no existe, o el post no existe
+
+Respuesta (422):estatus HTT es donde fue imposible completarlo, por que se valida que no se ponga un titulo vacío
+
+Respuesta (500):se esta enviando la información, pero algo esta haciendo en el código, que no funcione, y es que no se a creado en request en desarrollo en este caso, puede ser otro
+
+Respuesta (204):SIN CONTENDIO
+
+Respuesta a:Metodología TDD y testing HTTP
+
+Paso 1: Crear prueba, para obtener rojo
+
+Paso 2: Crear código para cumplir con esa prueba, para obtener verde
+
+Paso 3: Refactorización es una revisión posterior de revisar, organizar, crear métodos, para seguir consiguiendo verde sin alterar la prueba.
+
+
+
+
+
+
+
+
