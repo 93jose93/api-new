@@ -1,5 +1,12 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
+## Respuesta a:Metodología TDD y testing HTTP
+
+Paso 1: Crear prueba, para obtener rojo
+
+Paso 2: Crear código para cumplir con esa prueba, para obtener verde
+
+Paso 3: Refactorización es una revisión posterior de revisar, organizar, crear métodos, para seguir consiguiendo verde sin alterar la prueba.
 
 ## Protección de una API con Login
 
@@ -63,13 +70,7 @@ Respuesta (500):se esta enviando la información, pero algo esta haciendo en el 
 
 Respuesta (204):SIN CONTENDIO
 
-Respuesta a:Metodología TDD y testing HTTP
 
-Paso 1: Crear prueba, para obtener rojo
-
-Paso 2: Crear código para cumplir con esa prueba, para obtener verde
-
-Paso 3: Refactorización es una revisión posterior de revisar, organizar, crear métodos, para seguir consiguiendo verde sin alterar la prueba.
 
 
 
